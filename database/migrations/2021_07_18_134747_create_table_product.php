@@ -19,7 +19,7 @@ class CreateTableProduct extends Migration
             $table->integer('price');
             $table->integer('quantity');
             $table->text('description');
-            $table->boolean('acive')->default(false);
+            $table->boolean('active')->default(false);
             $table->timestamps();
         });
     }

@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,8 +18,11 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-//Customer
+// Customer
 Route::get('/customer', 'App\Http\Controllers\CustomerController@get');
 
-//Product
+// Product
 Route::get('/product', 'App\Http\Controllers\ProductController@get');
+Route::post('/product', 'App\Http\Controllers\ProductController@post');
+Route::put('/product/{id}', 'App\Http\Controllers\ProductController@put');
+Route::delete('/{id}', 'App\Http\Controllers\ProductController@delete');

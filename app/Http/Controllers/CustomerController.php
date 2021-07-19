@@ -11,7 +11,7 @@ class CustomerController extends Controller
     {
         return response()->json(
             [
-                "message" => "Success Get"
+                "message" => "Success Get ap"
             ]
         );
     }
