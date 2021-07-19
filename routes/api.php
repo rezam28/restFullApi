@@ -20,10 +20,14 @@ use Illuminate\Support\Facades\Route;
 
 // Customer
 Route::get('/customer', 'App\Http\Controllers\CustomerController@get');
+Route::get('/customer/{id}', 'App\Http\Controllers\CustomerController@getbyid');
+Route::post('/customer', 'App\Http\Controllers\CustomerController@post');
+Route::put('/customer/{id}', 'App\Http\Controllers\CustomerController@put');
+Route::delete('/customer{id}', 'App\Http\Controllers\CustomerController@delete');
 
 // Product
 Route::get('/product', 'App\Http\Controllers\ProductController@get');
 Route::get('/product/{id}', 'App\Http\Controllers\ProductController@getbyid');
 Route::post('/product', 'App\Http\Controllers\ProductController@post');
 Route::put('/product/{id}', 'App\Http\Controllers\ProductController@put');
-Route::delete('/{id}', 'App\Http\Controllers\ProductController@delete');
+Route::delete('/product{id}', 'App\Http\Controllers\ProductController@delete');

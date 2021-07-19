@@ -106,7 +106,7 @@ class ProductController extends Controller
 
     public function delete($id, Request $request)
     {
-        $product = Products::find('id', $id);
+        $product = Products::where('id', $id);
 
         if($product)
         {

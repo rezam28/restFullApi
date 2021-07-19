@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Customers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class CustomerController extends Controller
@@ -37,10 +38,11 @@ class CustomerController extends Controller
         $validation = Validator::make($request->all(), 
         [
             'name' => 'required',
-            'price' => 'required',
-            'quantity' => 'required',
-            'description' => 'required',
-            'active' => 'required',
+            'username' => 'required|unique:table_customer,username',
+            'password' => 'required',
+            'address' => 'required',
+            'phone' => 'required',
+            'email' => 'required|unique:table_customer,email',
         ]);
          
         if($validation->fails()) 
@@ -49,11 +51,15 @@ class CustomerController extends Controller
             return $errors->toJson();
         }else{
             $customer = new Customers();
+            $newpassword = Hash::make($request->password);
+
             $customer->name = $request->name;
-            $customer->price = $request->price;
-            $customer->quantity = $request->quantity;
-            $customer->active = $request->active;
-            $customer->description = $request->description;
+            $customer->username = $request->username;
+            // $customer->password = $request->password;
+            $customer->address = $request->address;
+            $customer->phone = $request->phone;
+            $customer->email = $request->email;
+            $customer->password = $newpassword;
 
             $customer->save();
             return response()->json(
@@ -72,10 +78,8 @@ class CustomerController extends Controller
         if($customer)
         {
             $customer->name = $request->name ? $request->name : $customer->name;
-            $customer->price = $request->price ? $request->price : $customer->price;
-            $customer->quantity = $request->quantity ? $request->quantity : $customer->quantity;
-            $customer->active = $request->active ? $request->active : $customer->active;
-            $customer->description = $request->description ? $request->description : $customer->description;
+            $customer->address = $request->address ? $request->address : $customer->address;
+            $customer->phone = $request->phone ? $request->phone : $customer->phone;
 
             $customer->save();
             return response()->json(
@@ -93,9 +97,9 @@ class CustomerController extends Controller
         );
     }
 
-    public function delete($id, Request $request)
+    public function delete($id)
     {
-        $customer = Customers::find('id', $id);
+        $customer = Customers::where('id', $id)->first();
 
         if($customer)
         {
