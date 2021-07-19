@@ -18,9 +18,21 @@ class ProductController extends Controller
             'active.required' => 'A '
         ];
     }
+
     public function get()
     {
         $product = Products::all();
+        return response()->json(
+            [
+                "message" => "Success Get",
+                "data" => $product
+            ]
+        );
+    }
+
+    public function getbyid($id)
+    {
+        $product = Products::where('id',$id)->first();
         return response()->json(
             [
                 "message" => "Success Get",
